@@ -1,0 +1,16 @@
+fastapi[all]
+uvicorn
+pymysql
+async-generator
+async-exit-stack
+cryptography
+pyyaml
+mysql-connector-python
+pandas
+sqlalchemy
+xlrd
+requests
+jwt
+pytz
+psycopg2-binary
+generateApiKey
