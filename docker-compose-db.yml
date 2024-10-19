@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mysql
+    container_name: api_mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=log_db
+      - MYSQL_USER=tester
+      - MYSQL_PASSWORD=tester
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./mysql-volume:/var/lib/mysql
+  pgdb:
+    image: postgres
+    container_name: api_pg
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=userinfo
+    volumes:
+      - ./pgdb-volume:/var/lib/postgresql/data
