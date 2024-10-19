@@ -13,7 +13,7 @@ classDiagram
       APPService o--  LogDB
       APPService o--  LLMService
       APPService o--  AIAgentService
-      APPService o--  EmbeddingService
+      APPService o--  RAGService
       
       class APIService{
           + Endpoints
@@ -53,7 +53,7 @@ classDiagram
           + LangChain
       }
 
-      class EmbeddingService {
+      class RAGService {
           + Ongoing...
       }
 
