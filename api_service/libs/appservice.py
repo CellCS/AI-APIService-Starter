@@ -20,9 +20,9 @@ class APPService:
         self.set_validated_apikey()
     
     def set_validated_apikey(self):
-        #sync from local userinfo db
+        #TODO: sync from local userinfo db
         pprint.pprint("sync: set_validated_apikey")
-        self.validated_apikeys = ["api_key1", "api_key2", "api_key3"]
+        self.validated_apikeys = ["api_key1"]
     
     def getmodels(self, providerlabel):
         if providerlabel.lower() not in [provider.lower() for provider in appconsts.ai_clients]:
