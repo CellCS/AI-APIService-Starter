@@ -87,13 +87,47 @@ async def model(payloaddata: apimodels.ModelsPayload, isauth: str = Depends(veri
     Get available models by a specific provider like Ollama, LM Studio, Azure OpenAI or OpenAI. 
     - **Message**: LLM model names.
     """
-    res = appservice.getmodels(payloaddata.apiprovider)
+    res = appservice.getmodels(payloaddata.llmclient)
     if len(res) > 0:
         return {"models": res}
     raise HTTPException(
         status_code=status.HTTP_400_BAD_REQUEST,
         detail="Incorrect parameter",
     )
+
+
+@app.post("/chat", response_model=apimodels.ChatResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["gpt-4o", "gpt-4omini"], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
+async def chat(payloaddata: apimodels.ChatPayload, isauth: str = Depends(verify_api_key)):
+    """
+    Generate the next message in a chat with a provided model and client (ollama, lm-studio, azure, openai). 
+    """
+    res = appservice.llm_clients.chat(payloaddata.llmclient, payloaddata.model,payloaddata.messages, 0.2)
+    return res
+
+@app.post("/generate", response_model=apimodels.GenerateResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["gpt-4o", "gpt-4omini"], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
+async def chat(payloaddata: apimodels.GeneratePayload, isauth: str = Depends(verify_api_key)):
+    """
+    Generate a response for a given prompt with a provided model. and client (ollama, lm-studio, azure, openai). 
+    """
+    res = appservice.llm_clients.generate(payloaddata.llmclient, payloaddata.model,payloaddata.prompt, False, payloaddata.messages)
+    return res
+
+@app.post("/generate", response_model=apimodels.GenerateResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["gpt-4o", "gpt-4omini"], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
+async def chat(payloaddata: apimodels.GeneratePayload, isauth: str = Depends(verify_api_key)):
+    """
+    Generate a response for a given prompt with a provided model. and client (ollama, lm-studio, azure, openai). 
+    """
+    res = appservice.llm_clients.generate(payloaddata.llmclient, payloaddata.model,payloaddata.prompt, False, payloaddata.messages)
+    return res
+
+
+@app.post("/v1/chat/completions", response_model=apimodels.V1ChatCompletionsResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["gpt-4o", "gpt-4omini"], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
+async def v1chatcompletions(payloaddata: apimodels.V1ChatCompletionsPayload, isauth: str = Depends(verify_api_key)):
+    """
+    Generate a response for a given prompt with a provided model. and client (ollama, lm-studio, azure, openai). 
+    """
+    res = appservice.llm_clients.v1chatcompletions(payloaddata.llmclient, payloaddata.model, payloaddata.messages)
+    return res
 
 
 if __name__ == "__main__":

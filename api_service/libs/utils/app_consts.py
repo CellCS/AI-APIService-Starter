@@ -8,7 +8,7 @@ dotenv_path = Path(home_dir) / "Keys" / "OpenAIService" / ".env"
 load_dotenv(dotenv_path=dotenv_path)
 
 default_db_type="mysql" #mysql or pg
-healthcheck_interval = 1 # 1min
+healthcheck_interval = 60 # 1min
 
 if default_db_type =="mysql":
     db_host_url =os.getenv('MYSQL_HOST', '')
@@ -28,7 +28,7 @@ db_log = "log_db"
 
 apihostip = os.getenv('APISERVICE_HOST_IP', '')
 apihostport = int(os.getenv('APISERVICE_HOST_PORT', '8000'))
-ai_providers=["ollama","lm-studio","azure","openai"]
+ai_clients=["ollama","lm-studio","openai","azure"]
 
 
 

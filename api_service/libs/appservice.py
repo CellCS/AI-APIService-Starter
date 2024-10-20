@@ -2,6 +2,7 @@ from libs.datamodels import api_models as apimodels
 from libs.utils import app_consts as appconsts
 from libs.utils import validations as validator
 from libs.db_services import lib_sql as  sqllib
+from libs.llm_services import lib_llms as lib_llms
 import pprint
 
 class APPService:
@@ -15,6 +16,7 @@ class APPService:
         # use mysql as default.
         appsqldb_userdb = sqllib.DatabaseConnection("mysql", appconsts.db_host_url, appconsts.db_user, appconsts.db_host_user,  appconsts.db_host_pwd, appconsts.db_host_port)
         appsqldb_logdb = sqllib.DatabaseConnection("mysql", appconsts.db_host_url, appconsts.db_log, appconsts.db_host_user,  appconsts.db_host_pwd, appconsts.db_host_port)
+        self.llm_clients = lib_llms.LLMSService()
         self.set_validated_apikey()
     
     def set_validated_apikey(self):
@@ -23,14 +25,14 @@ class APPService:
         self.validated_apikeys = ["api_key1", "api_key2", "api_key3"]
     
     def getmodels(self, providerlabel):
-        if providerlabel.lower() not in [provider.lower() for provider in appconsts.ai_providers]:
+        if providerlabel.lower() not in [provider.lower() for provider in appconsts.ai_clients]:
             return []
         else:
-            if providerlabel == appconsts.ai_providers[0]:
+            if providerlabel == appconsts.ai_clients[0]:
                 return appconsts.ollama_llm_models
-            elif providerlabel == appconsts.ai_providers[1]:
+            elif providerlabel == appconsts.ai_clients[1]:
                 return appconsts.lmstudio_llm_models
-            elif providerlabel == appconsts.ai_providers[2]:
+            elif providerlabel == appconsts.ai_clients[2]:
                 return appconsts.azure_openai_llm_models
             else:
                 return appconsts.openai_llm_models

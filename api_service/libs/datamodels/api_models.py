@@ -20,6 +20,43 @@ class AuthResponse(BaseModel):
 
 
 class ModelsPayload(BaseModel):
-    apiprovider: str
+    llmclient: str
 class ModelsResponse(BaseModel):
     models: list
+
+class ChatPayload(BaseModel):
+    llmclient: str
+    model:str
+    messages:list
+class ChatResponse(BaseModel):
+    client: str
+    model: str
+    messages: list
+    status_code: int
+    details: str
+    response: dict
+
+class GeneratePayload(BaseModel):
+    llmclient: str
+    model:str
+    prompt:str
+    messages:dict
+class GenerateResponse(BaseModel):
+    client: str
+    model: str
+    messages: list
+    status_code: int
+    details: str
+    response:dict
+
+class V1ChatCompletionsPayload(BaseModel):
+    llmclient: str
+    model:str
+    messages:dict
+class V1ChatCompletionsResponse(BaseModel):
+    client: str
+    model: str
+    messages: list
+    status_code: int
+    details: str
+    response:dict

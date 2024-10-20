@@ -42,7 +42,7 @@ curl -X POST http://127.0.0.1:8000/models \
   -H "Content-Type: application/json" \
   -H "Connection: close" \
   -H "APIKEY: api_key1" \
-  -d '{"apiprovider": "ollama"}'
+  -d '{"llmclient": "ollama"}'
 ```
 
 ```bash
@@ -51,8 +51,65 @@ curl -L \
     -H "Connection: close" \
     -H "APIKEY: api_key1" \
     -H "Content-type: application/json" \
-    -d '{"apiprovider": "ollama"}' \
+    -d '{"llmclient": "ollama"}' \
     http://127.0.0.1:8000/models --verbose
+```
+
+### Ollama
+
+chat:
+
+```bash
+curl -L \
+    -H "Accept: application/json" \
+    -H "APIKEY: api_key1" \
+    -H "Content-type: application/json" \
+    -d '{"llmclient": "ollama", "model": "llama3.2", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}' \
+    http://127.0.0.1:8000/chat --verbose
+```
+
+generate:
+
+```bash
+curl -L \
+    -H "Accept: application/json" \
+    -H "APIKEY: api_key1" \
+    -H "Content-type: application/json" \
+    -d '{"llmclient": "ollama", "model": "llama3.2", "prompt", "What color is the sky at different times of the day? Respond using JSON", "messages": [{"format": "json", "stream": false}]}' \
+    http://127.0.0.1:8000/generate --verbose
+```
+
+### LM Studio
+
+```bash
+curl -L \
+    -H "Accept: application/json" \
+    -H "APIKEY: api_key1" \
+    -H "Content-type: application/json" \
+    -d '{"llmclient": "lm-studio", "model": "llama3.2", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}' \
+    http://127.0.0.1:8000/chat --verbose
+```
+
+### OpenAI
+
+```bash
+curl -L \
+    -H "Accept: application/json" \
+    -H "APIKEY: api_key1" \
+    -H "Content-type: application/json" \
+    -d '{"llmclient": "openai", "model": "gpt-4o", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}' \
+    http://127.0.0.1:8000/chat
+```
+
+### AzureOpenAI
+
+```bash
+curl -L \
+    -H "Accept: application/json" \
+    -H "APIKEY: api_key1" \
+    -H "Content-type: application/json" \
+    -d '{"llmclient": "azure", "model": "gpt-4o", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}' \
+    http://127.0.0.1:8000/chat
 ```
 
 ## API Service database (MySQL)
