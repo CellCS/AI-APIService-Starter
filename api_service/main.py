@@ -104,7 +104,7 @@ async def chat(payloaddata: apimodels.ChatPayload, isauth: str = Depends(verify_
     res = appservice.llm_clients.chat(payloaddata.llmclient, payloaddata.model,payloaddata.messages, 0.2)
     return res
 
-@app.post("/generate", response_model=apimodels.GenerateResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["gpt-4o", "gpt-4omini"], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
+@app.post("/generate", response_model=apimodels.GenerateResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["The sky appears blue due to a phenomenon called Rayleigh scattering. When sunlight enters Earth's atmosphere"], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
 async def chat(payloaddata: apimodels.GeneratePayload, isauth: str = Depends(verify_api_key)):
     """
     Generate a response for a given prompt with a provided model. and client (ollama, lm-studio, azure, openai). 
@@ -112,7 +112,7 @@ async def chat(payloaddata: apimodels.GeneratePayload, isauth: str = Depends(ver
     res = appservice.llm_clients.generate(payloaddata.llmclient, payloaddata.model,payloaddata.prompt, False, payloaddata.messages)
     return res
 
-@app.post("/generate", response_model=apimodels.GenerateResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["gpt-4o", "gpt-4omini"], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
+@app.post("/generate", response_model=apimodels.GenerateResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["The sky appears blue due to a phenomenon called Rayleigh scattering. When sunlight enters Earth's atmosphere."], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
 async def chat(payloaddata: apimodels.GeneratePayload, isauth: str = Depends(verify_api_key)):
     """
     Generate a response for a given prompt with a provided model. and client (ollama, lm-studio, azure, openai). 
@@ -121,7 +121,7 @@ async def chat(payloaddata: apimodels.GeneratePayload, isauth: str = Depends(ver
     return res
 
 
-@app.post("/v1/chat/completions", response_model=apimodels.V1ChatCompletionsResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["gpt-4o", "gpt-4omini"], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
+@app.post("/v1/chat/completions", response_model=apimodels.V1ChatCompletionsResponse, tags=["Chatbot_Service"],responses={200: {"description": "A successful response", "content": {"application/json": {"example": {"messages": ["The sky appears blue due to a phenomenon called Rayleigh scattering. When sunlight enters Earth's atmosphere"], "details":"", "status_code":200, "client":"ollama", "model": "llama3.2", "response":{}}}}}})
 async def v1chatcompletions(payloaddata: apimodels.V1ChatCompletionsPayload, isauth: str = Depends(verify_api_key)):
     """
     Generate a response for a given prompt with a provided model. and client (ollama, lm-studio, azure, openai). 
